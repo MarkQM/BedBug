@@ -3,7 +3,7 @@ require 'json'
 
 module RentalPropertiesHelper
   def geocode(address)
-    uri = URI.parse("https://maps.googleapis.com/maps/api/geocode/json?address=#{address}")
+    uri = URI.parse(URI.escape("https://maps.googleapis.com/maps/api/geocode/json?address=#{address}"))
     uri.open do |f|
       h = JSON.parse(f.read)
       if h['status'] == 'OK' and h['results'].length > 0
@@ -26,7 +26,7 @@ module RentalPropertiesHelper
       return location_cache[ipaddress.to_s]
     end
 
-    uri = URI.parse("https://freegeoip.net/json/#{ipaddress}")
+    uri = URI.parse(URI.escape("https://freegeoip.net/json/#{ipaddress}"))
     begin
       uri.open do |f|
         h = JSON.parse(f.read)
