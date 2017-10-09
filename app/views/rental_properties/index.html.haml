@@ -4,9 +4,23 @@
     %table.table
         %thead
             %tr
-                %th Property
-                %th Description
-                %th Details
-                %th Distance from you
-                %th Price per night
+                %th= link_to("Property", rental_properties_path(sort_by: "title"))
+                %th= "Description"
+                %th= link_to("Details", rental_properties_path(sort_by: "capacity"))
+                %th= link_to("Distance from you", rental_properties_path(sort_by: "distance"))
+                %th= link_to("Price per night", rental_properties_path(sort_by: "price"))
+
+        %tbody
+            -@properties.each do |property|
+                %tr
+                    #title
+                        %td= link_to "#{property.title}", rental_property_path(property)
+                    #left-aligned
+                        %td= truncate(property.description, length: 60, separator: ' ')
+                        %td= "Sleeps #{property.maxpersons}, with #{pluralize(property.bedrooms, 'bedroom')} #{pluralize(property.beds, 'bed')} and #{pluralize(property.bathrooms, 'bathroom')}. Pets are #{property.pets_permitted} allowed."
+                    #right-aligned
+                        %td= property.distance_known(property.distance_from_client)
+                        %td= number_to_currency(property.price)
+                    
+
 

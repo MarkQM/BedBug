@@ -2,6 +2,8 @@ class RentalProperty < ApplicationRecord
 
 	include RentalPropertiesHelper
 
+	attr_accessor :distance_from_client
+
 	def self.filter_on_constraints(hash_of_constraints)
 		#puts hash_of_constraints.keys
 		#puts hash_of_constraints.values
@@ -71,6 +73,19 @@ class RentalProperty < ApplicationRecord
 		return (self.distance_from(location) <= distance)
 	end
 
+	def pets_permitted
+		if self.pets_allowed == true
+			return ""
+		end
+		return "not"
+	end
+
+	def distance_known(distance)
+		if distance == Float::INFINITY
+			return "Unknown"
+		end
+			return "#{number_to_human(distance, significant: true)} mi"
+	end
 
 	private
   	  	def degrees_to_rads(angle)
