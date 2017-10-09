@@ -1,0 +1,9 @@
+#main.container
+	%h3.header #{@property.title}
+
+	%p= "#{@property.description}"
+	%p
+	%p= "Sleeps #{@property.maxpersons}, with #{pluralize(@property.bedrooms, 'bedroom')} #{pluralize(@property.beds, 'bed')} and #{pluralize(@property.bathrooms, 'bathroom')}. Pets are #{@property.pets_permitted} allowed."
+	%p= "#{number_to_currency(@property.price)} per night."
+
+	%p= link_to("Back to rental properties list", rental_properties_path)
