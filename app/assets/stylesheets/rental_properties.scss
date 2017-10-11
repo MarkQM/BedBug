@@ -2,4 +2,27 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-#right-aligned
+
+body{
+	background-color: #262626;
+	color: white;
+}
+
+tr:hover{
+	background-color:gray;
+}
+
+tr.static{
+	background-color: #262626;
+}
+
+#main.container{
+	font-family: "Helvetica", monospace;
+	font-color: white;
+}
+
+
+h3{
+	font-size: 32px;
+	font-style: bold;
+}

@@ -84,7 +84,7 @@ class RentalProperty < ApplicationRecord
 		if distance == Float::INFINITY
 			return "Unknown"
 		end
-			return "#{number_to_human(distance, significant: true)} mi"
+			return distance
 	end
 
 	private

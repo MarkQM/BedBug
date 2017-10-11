@@ -3,7 +3,7 @@
 
     %table.table
         %thead
-            %tr
+            %tr.static
                 %th= link_to("Property", rental_properties_path(sort_by: "title"))
                 %th= "Description"
                 %th= link_to("Details", rental_properties_path(sort_by: "capacity"))
@@ -13,14 +13,11 @@
         %tbody
             -@properties.each do |property|
                 %tr
-                    #title
-                        %td= link_to "#{property.title}", rental_property_path(property)
-                    #left-aligned
-                        %td= truncate(property.description, length: 60, separator: ' ')
-                        %td= "Sleeps #{property.maxpersons}, with #{pluralize(property.bedrooms, 'bedroom')} #{pluralize(property.beds, 'bed')} and #{pluralize(property.bathrooms, 'bathroom')}. Pets are #{property.pets_permitted} allowed."
-                    #right-aligned
-                        %td= property.distance_known(property.distance_from_client)
-                        %td= number_to_currency(property.price)
+                    %td.title= link_to "#{property.title}", rental_property_path(property)
+                    %td= truncate(property.description, length: 60, separator: ' ')
+                    %td= "Sleeps #{property.maxpersons}, with #{pluralize(property.bedrooms, 'bedroom')} #{pluralize(property.beds, 'bed')} and #{pluralize(property.bathrooms, 'bathroom')}. Pets are #{property.pets_permitted} allowed."
+                    %td.text-right= "#{number_to_human(property.distance_known(property.distance_from_client), significant: true)} mi "
+                    %td.text-right= number_to_currency(property.price)
                     
 
 

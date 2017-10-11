@@ -18,6 +18,7 @@ class RentalPropertiesController < ApplicationController
 			@properties = @properties.sort_by{|property| property.distance_from_client}.reverse
 		end
 
+		#test_location = "149.43.80.13"
 		client_location = geolocate(request.remote_ip)
 		@properties.each do |property|
 			property.distance_from_client = property.distance_from(client_location)
@@ -27,6 +28,7 @@ class RentalPropertiesController < ApplicationController
 
 	def show
 		@property = RentalProperty.find(params[:id])
+		#test_location = "149.43.80.13"
 		client_location = geolocate(request.remote_ip)
 		@property.distance_from_client = @property.distance_from(client_location)
 	end

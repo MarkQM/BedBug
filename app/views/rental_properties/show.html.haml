@@ -4,6 +4,6 @@
 	%p= "#{@property.description}"
 	%p
 	%p= "Sleeps #{@property.maxpersons}, with #{pluralize(@property.bedrooms, 'bedroom')} #{pluralize(@property.beds, 'bed')} and #{pluralize(@property.bathrooms, 'bathroom')}. Pets are #{@property.pets_permitted} allowed."
-	%p= "#{number_to_currency(@property.price)} per night."
+	%p= "#{number_to_currency(@property.price)} per night.  Only #{number_to_human(@property.distance_known(@property.distance_from_client), significant: true)} mi away!"
 
 	%p= link_to("Back to rental properties list", rental_properties_path)
