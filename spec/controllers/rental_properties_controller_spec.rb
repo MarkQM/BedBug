@@ -14,7 +14,7 @@ RSpec.describe RentalPropertiesController, type: :controller do
         end
 
         it "renders the index template and does default sorting" do
-            x, y = RentalProperty.create!, RentalProperty.create!
+            x, y = RentalProperty.create!(latitude: 0, longitude: 0), RentalProperty.create!(latitude: 0, longitude: 0)
             get :index
             expect(assigns(:properties)).to match_array([x,y])
             expect(response).to render_template("index")
@@ -23,14 +23,14 @@ RSpec.describe RentalPropertiesController, type: :controller do
 
     context "show" do
         it "routes correctly" do
-            p = RentalProperty.new(title: "Pwll o le")
+            p = RentalProperty.new(title: "Pwll o le", latitude: 0, longitude: 0)
             expect(RentalProperty).to receive(:find).with("1") { p }
             get :show, :params => { :id => 1 }
             expect(response.status).to eq(200)
         end
 
         it "renders the show template" do
-            p = RentalProperty.new(title: "Pwll o le")
+            p = RentalProperty.new(title: "Pwll o le", latitude: 0, longitude: 0)
             expect(RentalProperty).to receive(:find).with("1") { p }
             get :show, :params => { :id => 1 }
             expect(response).to render_template("show")
