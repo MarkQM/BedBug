@@ -5,19 +5,19 @@
         %thead
             %tr.static
                 %th= link_to("Property", rental_properties_path(sort_by: "title"))
+                %th= ""
                 %th= "Description"
                 %th= link_to("Details", rental_properties_path(sort_by: "capacity"))
                 %th= link_to("Distance from you", rental_properties_path(sort_by: "distance"))
                 %th= link_to("Price per night", rental_properties_path(sort_by: "price"))
-
         %tbody
             -@properties.each do |property|
                 %tr
+                    %td= image_tag(property.image.url(:thumb))
                     %td.title= link_to "#{property.title}", rental_property_path(property)
                     %td= truncate(property.description, length: 60, separator: ' ')
                     %td= "Sleeps #{property.maxpersons}, with #{pluralize(property.bedrooms, 'bedroom')} #{pluralize(property.beds, 'bed')} and #{pluralize(property.bathrooms, 'bathroom')}. Pets are #{property.pets_permitted} allowed."
                     %td.text-right= "#{number_to_human(property.distance_known(property.distance_from_client), significant: true)} mi "
                     %td.text-right= number_to_currency(property.price)
-                    
 
-
+    %p= link_to("Create a new rental property", new_rental_property_path)

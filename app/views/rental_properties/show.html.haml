@@ -2,8 +2,11 @@
 	%h3.header #{@property.title}
 
 	%p= "#{@property.description}"
-	%p
-	%p= "Sleeps #{@property.maxpersons}, with #{pluralize(@property.bedrooms, 'bedroom')} #{pluralize(@property.beds, 'bed')} and #{pluralize(@property.bathrooms, 'bathroom')}. Pets are #{@property.pets_permitted} allowed."
+	%br
+	%p= "Sleeps #{@property.maxpersons}, with #{pluralize(@property.bedrooms, 'bedroom')}, #{pluralize(@property.beds, 'bed')}, and #{pluralize(@property.bathrooms, 'bathroom')}. Pets are #{@property.pets_permitted} allowed."
 	%p= "#{number_to_currency(@property.price)} per night.  Only #{number_to_human(@property.distance_known(@property.distance_from_client), significant: true)} mi away!"
-
-	%p= link_to("Back to rental properties list", rental_properties_path)
+	%p= image_tag(@property.image.url(:medium))
+	%br
+	%p=link_to("Back to rental properties list", rental_properties_path)
+	%p=link_to("Edit rental property", edit_rental_property_path(@property))
+	%p=link_to("Delete rental property", rental_property_path(@property), :method => :delete)

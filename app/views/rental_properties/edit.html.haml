@@ -1,0 +1,38 @@
+#main.container
+	%h3.header Edit rental property
+
+	= form_for @property, :method=> :put do |f|
+
+		= f.label @property, "Title"
+		= f.text_field :title, required: true
+		%br
+		= f.label :description, "Description"
+		= f.text_field :description, size: 70
+		%br
+		= f.label :bedrooms, "Bedrooms"
+		= f.number_field :bedrooms, required: true
+		%br
+		= f.label :beds, "Beds"
+		= f.number_field :beds, required: true
+		%br
+		= f.label :maxpersons, "Maximum people allowed"
+		= f.number_field :maxpersons, required: true
+		%br
+		= f.label :bathroom, "Bathrooms"
+		= f.number_field :bathrooms, required: true
+		%br
+		= f.label :pets_allowed, "Pets allowed?"
+		= f.check_box(:pets_allowed, {}, true, false)
+		%br
+		= f.label :address, "Address"
+		= f.text_field :address, required: true
+		%br
+		= f.label :price, "Price"
+		= f.number_field :price, required: true
+		%br
+		= f.label :image, "Upload your picture"
+		= f.file_field :image, accept: "image/jpeg, image/bmp, image/png"
+		%br
+		= f.submit ("Save changes")
+	%p=""
+	%p= link_to("Back to rental properties list", rental_properties_path)

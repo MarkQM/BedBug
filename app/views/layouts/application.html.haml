@@ -8,7 +8,19 @@
     = javascript_include_tag 'application'
 
   %body
+
     #header
       %h1 bedbug bnb
       .logo= image_tag("bedbug.png", :width => 100)
+
+    -if flash[:notice]
+      #notice.message
+        %p
+        %h4= flash[:notice]
+        %p
+    -elsif flash[:warning]
+      #warning.message
+        %p
+        %h4= flash[:warning]
+        %p
     = yield

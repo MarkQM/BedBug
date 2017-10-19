@@ -13,3 +13,25 @@
  *= require_tree .
  *= require_self
  */
+
+#notice.message{
+	font-family: "Helvetica", monospace;
+	background-color: #b3f0ff;
+	color: blue;
+	max-width: 2000px;
+    border: 25px;
+    border-radius: 5px;
+    padding: 5px;
+    margin-top: 15px;
+}
+
+#warning.message{
+	font-family: "Helvetica", monospace;
+	background-color: #ff9999;
+	color: red;
+	max-width: 2000px;
+    border: 25px;
+    border-radius: 5px;
+    padding: 5px;
+    margin-top: 15px;
+}

@@ -2,6 +2,10 @@ class RentalProperty < ApplicationRecord
 
 	include RentalPropertiesHelper
 
+
+	has_attached_file :image, :styles=>{:medium => "300x300>", :thumb => "100x100>"}, :default_url => "noimg.png"
+	validates_attachment :image, :content_type => {:content_type => ["image/jpeg", "image/png", "image/gif"]}
+
 	attr_accessor :distance_from_client
 
 	def self.filter_on_constraints(hash_of_constraints)

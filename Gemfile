@@ -30,6 +30,7 @@ gem 'jbuilder', '~> 2.5'
 
 gem 'haml'
 gem 'haml-rails'
+gem "paperclip"
 
 
 # Use Capistrano for deployment
