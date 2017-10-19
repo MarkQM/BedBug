@@ -1,15 +1,28 @@
 require 'rails_helper'
 
-# Specs in this file have access to a helper object that includes
-# the RentalPropertiesHelper. For example:
-#
-# describe RentalPropertiesHelper do
-#   describe "string concat" do
-#     it "concats two strings with spaces" do
-#       expect(helper.concat_strings("this","that")).to eq("this that")
-#     end
-#   end
-# end
 RSpec.describe RentalPropertiesHelper, type: :helper do
-  pending "add some examples to (or delete) #{__FILE__}"
+  describe "geocode method tests" do
+    it "should return nil on a bad address" do
+      result = geocode("!.!")
+      expect(result).to match_array([nil, nil])
+    end
+
+    it "should geocode postcode CF14 3AS correctly and consistently" do
+      lat, lng = geocode("CF14 3AS")
+      expect(lat).to be_within(0.000001).of(51.4974098)
+      expect(lng).to be_within(0.000001).of(-3.1967231)
+    end
+  end
+
+  describe "geolocate" do
+      it "should return nil,nil for localhost" do
+          result = geolocate("127.0.0.1")
+          expect(result).to match_array([nil,nil])
+      end
+
+      it "should gracefully handle bad ip addresses" do
+          result = geolocate("....")
+          expect(result).to match_array([nil,nil])
+      end
+  end
 end

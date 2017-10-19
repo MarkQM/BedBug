@@ -10,4 +10,18 @@ See homework instructions posted on Moodle.
 
 ## Grade and feedback
 
-Once you commit and submit your work to Github, I'll update this section with feedback and grading info.
+Great job!  Code all looks good and works nicely too. 
+Nice dark view to the css :-)
+
+100/
+
+--------------------------
+Automated test results:
+/usr/local/Cellar/ruby/2.4.2/bin/ruby -I/usr/local/lib/ruby/gems/2.4.0/gems/rspec-core-3.6.0/lib:/usr/local/lib/ruby/gems/2.4.0/gems/rspec-support-3.6.0/lib /usr/local/lib/ruby/gems/2.4.0/gems/rspec-core-3.6.0/exe/rspec --pattern spec/\*\*\{,/\*/\*\*\}/\*_spec.rb
+..........................
+
+Finished in 4.44 seconds (files took 4.02 seconds to load)
+26 examples, 0 failures
+
+
+--------------------------
