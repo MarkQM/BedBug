@@ -1,3 +1,5 @@
+%p
+%p
 #main.container
     %h3.header Properties available for rent
 
@@ -23,12 +25,12 @@
     %table.table
         %thead
             %tr.static
-                %th= link_to("Property", rental_properties_path(sort_by: "title"))
+                %th= link_to("Property", request.params.merge(sort_by: "title"))
                 %th= ""
                 %th= "Description"
-                %th= link_to("Details", rental_properties_path(sort_by: "capacity"))
-                %th= link_to("Distance from you", rental_properties_path(sort_by: "distance"))
-                %th= link_to("Price per night", rental_properties_path(sort_by: "price"))
+                %th= link_to("Details", request.params.merge(sort_by: "capacity"))
+                %th= link_to("Distance from you", request.params.merge(sort_by: "distance"))
+                %th= link_to("Price per night", request.params.merge(sort_by: "price"))
         %tbody
             -@properties.each do |property|
                 %tr

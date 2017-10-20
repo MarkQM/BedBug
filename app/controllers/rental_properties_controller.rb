@@ -3,38 +3,18 @@ class RentalPropertiesController < ApplicationController
 	include RentalPropertiesHelper
 
 	def index
-
-		if params[:sort_by]
-			session[:sort_by] = params[:sort_by]
-		elsif session[:sort_by] != params[:sort_by]
-			params[:sort_by] = session[:sort_by]
-			@redirect = true
-		end
-
 		#client_location = "149.43.80.13"
 		client_location = geolocate(request.remote_ip)
 
 		search_filters = [:maxpersons, :price, :bathrooms, :distance, :address]
 		hashOfConstraints = Hash.new
 
+		load_session(search_filters)
 
 		search_filters.each do |filter|
-			if params[filter]
-				if params[filter] != ''
-					hashOfConstraints[filter] = params[filter]
-				end
-				session[filter] = params[filter]
-			elsif session[filter] != params[filter]
-				params[filter] = session[filter]
-				@redirect = true
+			if params[filter] && params[filter] != ''
+				hashOfConstraints[filter] = params[filter]
 			end
-		end
-
-		if @redirect
-			@redirect = false
-			flash.keep
-			#redirect_to(rental_properties_path, sort_by: session[:sort_by], maxpersons: session[:maxpersons], price: session[:price], 
-			#	bathrooms: session[:bathrooms], distance: session[:distance], address: session[:address]) and return
 		end
 
 		@properties = RentalProperty.filter_on_constraints(hashOfConstraints)
@@ -137,6 +117,27 @@ class RentalPropertiesController < ApplicationController
 			params.require(:rental_property).permit(:title,:description,:bedrooms,:beds,:maxpersons, 
 			:bathrooms, :pets_allowed,  :address, :price, :image)
 
+		end
+
+
+		def load_session(search_filters)
+			session_fields = [:sort_by].concat(search_filters)
+			redirect = false
+			session_fields.each do |field|
+				if params[field]
+					session[field] = params[field]
+				elsif session[field] != params[field]
+					params[field] = session[field]
+					redirect = true
+				end
+			end
+
+			if redirect
+				flash.keep
+				#redirect_to(rental_properties_path)
+				redirect_to(rental_properties_path(sort_by: session[:sort_by], maxpersons: session[:maxpersons], price: session[:price], 
+					bathrooms: session[:bathrooms], distance: session[:distance], address: session[:address])) and return
+			end
 		end
 
 end
