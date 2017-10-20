@@ -34,7 +34,7 @@ class RentalPropertiesController < ApplicationController
 			@properties = @properties.order(:price)
 
 		else
-			@properties = @properties.sort_by{|property| property.distance_from_client}.reverse
+			@properties = @properties.sort_by{|property| property.distance_from_client}
 		end
 
 		if params[:distance] && params[:distance] != ''
