@@ -3,34 +3,34 @@
 
 	= form_for @property, :method=> :post do |f|
 
-		= f.label @property, "Title"
+		= f.label "Title"
 		= f.text_field :title, required: true
 		%br
-		= f.label :description, "Description"
+		= f.label "Description"
 		= f.text_field :description, size: 70
 		%br
-		= f.label :bedrooms, "Bedrooms"
-		= f.number_field :bedrooms, required: true
+		= f.label "Bedrooms"
+		= f.number_field :bedrooms, required: true, :min => 0
 		%br
-		= f.label :beds, "Beds"
-		= f.number_field :beds, required: true
+		= f.label "Beds"
+		= f.number_field :beds, required: true, :min => 0
 		%br
-		= f.label :maxpersons, "Maximum people allowed"
-		= f.number_field :maxpersons, required: true
+		= f.label "Maximum people allowed"
+		= f.number_field :maxpersons, required: true, :min => 1
 		%br
-		= f.label :bathroom, "Bathrooms"
-		= f.number_field :bathrooms, required: true
+		= f.label "Bathrooms"
+		= f.number_field :bathrooms, required: true, :min => 0
 		%br
-		= f.label :pets_allowed, "Pets allowed?"
-		= f.check_box(:pets_allowed, {}, true, false)
+		= f.label "Pets allowed?"
+		= f.check_box :pets_allowed
 		%br
-		= f.label :address, "Address"
+		= f.label "Address"
 		= f.text_field :address, required: true
 		%br
-		= f.label :price, "Price"
-		= f.number_field :price, required: true
+		= f.label "Price"
+		= f.number_field :price, required: true, :min => 0, :step => 0.01
 		%br
-		= f.label :image, "Upload your picture"
+		= f.label "Upload your picture"
 		= f.file_field :image, accept: "image/jpeg, image/bmp, image/png"
 		%br
 		= f.submit ("Create new property")

@@ -14,40 +14,40 @@ class RentalProperty < ApplicationRecord
 		filteredRentalProperties = RentalProperty.all
 		hash_of_constraints.each do |field, constraint|
 			if (field == :bedrooms)
-				if constraint.is_a? Integer
+				#if constraint.is_a? Integer
 					#filteredRentalProperties = filteredRentalProperties.where('"#{field}" >= constraint')
-					filteredRentalProperties = filteredRentalProperties.where('bedrooms >= :constraint', :constraint => constraint)
-				end
+				filteredRentalProperties = filteredRentalProperties.where('bedrooms >= ?', constraint.to_i)
+				#end
 
 			elsif (field == :beds)
-				if constraint.is_a? Integer
-					filteredRentalProperties = filteredRentalProperties.where('beds >= :constraint', :constraint => constraint)
-				end
-
+				#if constraint.is_a? Integer
+				filteredRentalProperties = filteredRentalProperties.where('beds >= ?', constraint.to_i)
+				#end
 
 			elsif (field == :maxpersons)
-				if constraint.is_a? Integer
-					filteredRentalProperties = filteredRentalProperties.where('maxpersons >= :constraint', :constraint => constraint)
-				end
+				#if constraint.is_a? Integer
+				filteredRentalProperties = filteredRentalProperties.where('maxpersons >= ?', constraint.to_i)
+				#end
 
 			elsif (field == :bathrooms)
-				if constraint.is_a? Integer
-					filteredRentalProperties = filteredRentalProperties.where('bathrooms >= :constraint', :constraint => constraint)
-				end
+				#if constraint.is_a? Integer
+				filteredRentalProperties = filteredRentalProperties.where('bathrooms >= ?', constraint.to_i)
+				#end
 
 			elsif (field == :pets_allowed)
-				if (constraint.is_a? FalseClass) || (constraint.is_a? TrueClass)
-					filteredRentalProperties = filteredRentalProperties.where('pets_allowed == :constraint', :constraint => constraint)
-				end
+				#if (constraint.is_a? FalseClass) || (constraint.is_a? TrueClass)
+				filteredRentalProperties = filteredRentalProperties.where('pets_allowed == ?', constraint)
+				#end
 
 			elsif (field == :price)
-				if constraint.is_a? Integer
-					filteredRentalProperties = filteredRentalProperties.where('price <= :constraint', :constraint => constraint)
-				end
+				#if constraint.is_a? Integer
+				filteredRentalProperties = filteredRentalProperties.where('price <= ?', constraint.to_i)
+				#end
 			end
 		end
 		return filteredRentalProperties
 	end
+
 
 	def distance_from(location)
 

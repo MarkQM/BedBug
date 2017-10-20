@@ -1,6 +1,25 @@
 #main.container
     %h3.header Properties available for rent
 
+    = form_tag rental_properties_path, :method => :get do
+
+        = label_tag "Minimum occupants"
+        = number_field_tag :maxpersons, nil ,:min=>1
+
+        = label_tag "Number of bathrooms"
+        = number_field_tag :bathrooms, nil, :min=>0
+
+        = label_tag "Maximum price"
+        = number_field_tag :price, nil, :min=>0
+        %p
+        = label_tag "Within"
+        = number_field_tag :distance, nil, :min=>1
+
+        = label_tag "miles of"
+        = text_field_tag :address
+        = submit_tag "Filter rental properties"
+        %br
+
     %table.table
         %thead
             %tr.static
