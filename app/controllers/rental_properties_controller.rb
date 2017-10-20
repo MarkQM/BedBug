@@ -3,7 +3,7 @@ class RentalPropertiesController < ApplicationController
 	include RentalPropertiesHelper
 
 	def index
-		#client_location = "149.43.80.13"
+		#client_location = "149.43.129.150"
 		client_location = geolocate(request.remote_ip)
 
 		search_filters = [:maxpersons, :price, :bathrooms, :distance, :address]
@@ -23,18 +23,19 @@ class RentalPropertiesController < ApplicationController
 			property.distance_from_client = property.distance_from(client_location)
 		end
 
+		@properties = @properties.sort_by{|property| property.distance_from_client}
 
 		if params[:sort_by] == "title"
-			@properties = @properties.order(:title)
+			@properties = @properties.sort_by{|property| property.title}
+			#@properties = @properties.order(:title)
 
 		elsif params[:sort_by] == "capacity"
-			@properties = @properties.order(:maxpersons)
+			#@properties = @properties.order(:maxpersons)
+			@properties = @properties.sort_by{|property| property.maxpersons}
 
 		elsif params[:sort_by] == "price"
-			@properties = @properties.order(:price)
-
-		else
-			@properties = @properties.sort_by{|property| property.distance_from_client}
+			#@properties = @properties.order(:price)
+			@properties = @properties.sort_by{|property| property.price}
 		end
 
 		if params[:distance] && params[:distance] != ''
